@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brand | Product Detail</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+    <header class="top-bar">
+        <div class="top-bar-left">
+            <span>🌐 English, USD</span>
+            <span>Ship to 🇩🇪</span>
+        </div>
+    </header>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">🅱 Brand</a>
+            <div class="search-box">
+                <input type="text" placeholder="Search...">
+                <select><option>All category</option></select>
+                <button class="btn-search">Search</button>
+            </div>
+            <div class="nav-icons">
+                <a href="#">👤<span>Profile</span></a>
+                <a href="#">🛒<span>My cart</span></a>
+            </div>
+        </div>
+        <div class="secondary-nav">
+            <a href="#">☰ All category</a>
+            <a href="#">Hot offers</a>
+            <a href="#">Gift boxes</a>
+        </div>
+    </nav>
+
+    <div class="breadcrumb">
+        <a href="/">Home</a> › <a href="#">Clothings</a> › <a href="#">Mens wear</a> › <span>Summer clothing</span>
+    </div>
+
+    <div class="detail-layout">
+
+        <!-- LEFT: Images -->
+        <div class="detail-images">
+            <img src="https://via.placeholder.com/400x350/eeeeee/333333?text=Product" alt="Product" class="main-img">
+            <div class="thumbnail-row">
+                <img src="https://via.placeholder.com/70x60" alt="">
+                <img src="https://via.placeholder.com/70x60" alt="">
+                <img src="https://via.placeholder.com/70x60" alt="">
+                <img src="https://via.placeholder.com/70x60" alt="">
+            </div>
+        </div>
+
+        <!-- RIGHT: Info -->
+        <div class="detail-info">
+            <p class="in-stock">✔ In stock</p>
+            <h1>Mens Long Sleeve T-shirt Cotton Base Layer Slim Muscle</h1>
+
+            <div class="rating-row">
+                <span class="stars">★★★★★</span>
+                <span>9.3</span>
+                <span class="sep">|</span>
+                <span>32 reviews</span>
+                <span class="sep">|</span>
+                <span>154 sold</span>
+            </div>
+
+            <!-- PRICING TIERS (as in Figma) -->
+            <div class="price-tiers">
+                <div class="tier active-tier">
+                    <span class="tier-price">$98.00</span>
+                    <span class="tier-qty">50-100 pcs</span>
+                </div>
+                <div class="tier">
+                    <span class="tier-price">$90.00</span>
+                    <span class="tier-qty">100-700 pcs</span>
+                </div>
+                <div class="tier">
+                    <span class="tier-price">$78.00</span>
+                    <span class="tier-qty">700+ pcs</span>
+                </div>
+            </div>
+
+            <!-- SPECS TABLE -->
+            <table class="specs-table">
+                <tr><td>Price</td><td>Negotiable</td></tr>
+                <tr><td>Type</td><td>Classic shoes</td></tr>
+                <tr><td>Material</td><td>Plastic material</td></tr>
+                <tr><td>Design</td><td>Modern nice</td></tr>
+                <tr><td>Customization</td><td>Customized logo and design custom packages</td></tr>
+                <tr><td>Protection</td><td>Refund Policy</td></tr>
+                <tr><td>Warranty</td><td>2 years full warranty</td></tr>
+            </table>
+
+            <div class="detail-actions">
+                <button class="btn-primary">Send inquiry</button>
+                <button class="btn-secondary">Save for later</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TABS: Description / Reviews / Shipping -->
+    <div class="tabs-section">
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab(this, 'description')">Description</button>
+            <button class="tab" onclick="switchTab(this, 'reviews')">Reviews</button>
+            <button class="tab" onclick="switchTab(this, 'shipping')">Shipping</button>
+            <button class="tab" onclick="switchTab(this, 'seller')">About seller</button>
+        </div>
+
+        <div id="description" class="tab-content active">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <table class="specs-table" style="margin-top:1rem">
+                <tr><td>Model</td><td>#8786867</td></tr>
+                <tr><td>Style</td><td>Classic style</td></tr>
+                <tr><td>Certificate</td><td>ISO-898212</td></tr>
+                <tr><td>Size</td><td>34mm x 450mm x 19mm</td></tr>
+                <tr><td>Memory</td><td>36GB RAM</td></tr>
+            </table>
+            <ul class="feature-list">
+                <li>✔ Some great feature name here</li>
+                <li>✔ Lorem ipsum dolor sit amet consectetur</li>
+                <li>✔ Duis aute irure dolor in reprehenderit</li>
+                <li>✔ Some great feature name here</li>
+            </ul>
+        </div>
+
+        <div id="reviews" class="tab-content">
+            <p>Customer reviews will appear here.</p>
+        </div>
+        <div id="shipping" class="tab-content">
+            <p>Shipping information will appear here.</p>
+        </div>
+        <div id="seller" class="tab-content">
+            <p>Seller information will appear here.</p>
+        </div>
+    </div>
+
+    <!-- RELATED PRODUCTS -->
+    <section class="related-section">
+        <h3>Related products</h3>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="card-top"><img src="https://via.placeholder.com/160x130" alt=""></div>
+                <div class="card-body">
+                    <p class="product-name">Xiaomi Redmi 8 Original</p>
+                    <div class="price-row"><span class="price">$32.00</span><span class="old-price">$40.00</span></div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="card-top"><img src="https://via.placeholder.com/160x130" alt=""></div>
+                <div class="card-body">
+                    <p class="product-name">Xiaomi Redmi 8 Original</p>
+                    <div class="price-row"><span class="price">$32.00</span><span class="old-price">$40.00</span></div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="card-top"><img src="https://via.placeholder.com/160x130" alt=""></div>
+                <div class="card-body">
+                    <p class="product-name">Xiaomi Redmi 8 Original</p>
+                    <div class="price-row"><span class="price">$32.00</span><span class="old-price">$40.00</span></div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="card-top"><img src="https://via.placeholder.com/160x130" alt=""></div>
+                <div class="card-body">
+                    <p class="product-name">Xiaomi Redmi 8 Original</p>
+                    <div class="price-row"><span class="price">$32.00</span><span class="old-price">$40.00</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-bottom"><p>© 2026 Brand. All rights reserved.</p></div>
+    </footer>
+
+    <script src="/script.js"></script>
+</body>
+</html>

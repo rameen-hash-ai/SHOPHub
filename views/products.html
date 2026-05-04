@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brand | Products</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+    <header class="top-bar">
+        <div class="top-bar-left">
+            <span>🌐 English, USD</span>
+            <span>Ship to 🇩🇪</span>
+        </div>
+    </header>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">🅱 Brand</a>
+            <div class="search-box">
+                <input type="text" placeholder="Search..." id="searchInput">
+                <select>
+                    <option>All category</option>
+                    <option>Electronics</option>
+                    <option>Clothing</option>
+                </select>
+                <button class="btn-search" onclick="handleSearch()">Search</button>
+            </div>
+            <div class="nav-icons">
+                <a href="#">👤<span>Profile</span></a>
+                <a href="#">🛒<span>My cart</span></a>
+            </div>
+        </div>
+        <div class="secondary-nav">
+            <a href="#">☰ All category</a>
+            <a href="#">Hot offers</a>
+            <a href="#">Gift boxes</a>
+            <a href="#">Projects</a>
+        </div>
+    </nav>
+
+    <!-- BREADCRUMB -->
+    <div class="breadcrumb">
+        <a href="/">Home</a> › <a href="/products">Products</a> › <span>Mobile accessory</span>
+    </div>
+
+    <div class="products-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+
+            <div class="filter-group">
+                <h4>Category <span>∧</span></h4>
+                <ul>
+                    <li><a href="#">Mobile accessory</a></li>
+                    <li><a href="#">Electronics</a></li>
+                    <li><a href="#">Smartphones</a></li>
+                    <li><a href="#">Modern tech</a></li>
+                    <li><a href="#" class="see-all">See all</a></li>
+                </ul>
+            </div>
+
+            <div class="filter-group">
+                <h4>Brands <span>∧</span></h4>
+                <label><input type="checkbox" checked> Samsung</label>
+                <label><input type="checkbox" checked> Apple</label>
+                <label><input type="checkbox"> Huawei</label>
+                <label><input type="checkbox" checked> Pocco</label>
+                <label><input type="checkbox"> Lenovo</label>
+                <a href="#" class="see-all">See all</a>
+            </div>
+
+            <div class="filter-group">
+                <h4>Features <span>∧</span></h4>
+                <label><input type="checkbox" checked> Metallic</label>
+                <label><input type="checkbox"> Plastic cover</label>
+                <label><input type="checkbox"> 8GB Ram</label>
+                <label><input type="checkbox"> Super power</label>
+                <label><input type="checkbox"> Large Memory</label>
+            </div>
+
+            <div class="filter-group">
+                <h4>Price range</h4>
+                <input type="range" min="0" max="500" value="250" class="price-range">
+                <div class="price-labels"><span>$0</span><span>$500</span></div>
+            </div>
+
+            <div class="filter-group">
+                <h4>Condition</h4>
+                <label><input type="radio" name="condition"> Any</label>
+                <label><input type="radio" name="condition"> Refurbished</label>
+                <label><input type="radio" name="condition"> Brand New</label>
+            </div>
+
+            <div class="filter-group">
+                <h4>Ratings</h4>
+                <label><input type="radio" name="rating"> ★★★★★</label>
+                <label><input type="radio" name="rating"> ★★★★☆</label>
+                <label><input type="radio" name="rating"> ★★★☆☆</label>
+            </div>
+
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="products-main">
+
+            <div class="products-header">
+                <p>12,911 items in <strong>Mobile accessory</strong></p>
+                <div class="products-controls">
+                    <label><input type="checkbox"> Verified only</label>
+                    <select>
+                        <option>Featured</option>
+                        <option>Price: Low to High</option>
+                        <option>Price: High to Low</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- ACTIVE FILTERS -->
+            <div class="active-filters">
+                <span class="filter-tag">Samsung ✕</span>
+                <span class="filter-tag">Apple ✕</span>
+                <span class="filter-tag">Poco ✕</span>
+                <span class="filter-tag">Metallic ✕</span>
+                <span class="filter-tag">4 star ✕</span>
+                <a href="#" class="clear-filters">Clear all filter</a>
+            </div>
+
+            <!-- PRODUCT GRID -->
+            <div class="product-grid">
+                <div class="product-card" onclick="window.location='/products/1'">
+                    <div class="card-top">
+                        <img src="https://via.placeholder.com/200x160" alt="Product">
+                        <button class="wishlist">♡</button>
+                    </div>
+                    <div class="card-body">
+                        <p class="product-name">GoPro HERO5 4K Action Camera - Black</p>
+                        <div class="stars">★★★★☆ <span>7.5</span></div>
+                        <div class="price-row">
+                            <span class="price">$99.50</span>
+                            <span class="old-price">$128.00</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card" onclick="window.location='/products/2'">
+                    <div class="card-top">
+                        <img src="https://via.placeholder.com/200x160" alt="Product">
+                        <button class="wishlist">♡</button>
+                    </div>
+                    <div class="card-body">
+                        <p class="product-name">Apple iPhone 12 Pro Max</p>
+                        <div class="stars">★★★★★ <span>9.3</span></div>
+                        <div class="price-row">
+                            <span class="price">$99.50</span>
+                            <span class="old-price">$128.00</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card" onclick="window.location='/products/3'">
+                    <div class="card-top">
+                        <img src="https://via.placeholder.com/200x160" alt="Product">
+                        <button class="wishlist">♡</button>
+                    </div>
+                    <div class="card-body">
+                        <p class="product-name">Canon EOS DSLR Camera Black</p>
+                        <div class="stars">★★★★☆ <span>7.5</span></div>
+                        <div class="price-row">
+                            <span class="price">$99.50</span>
+                            <span class="old-price">$128.00</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card" onclick="window.location='/products/4'">
+                    <div class="card-top">
+                        <img src="https://via.placeholder.com/200x160" alt="Product">
+                        <button class="wishlist">♡</button>
+                    </div>
+                    <div class="card-body">
+                        <p class="product-name">Samsung Galaxy S21 Ultra</p>
+                        <div class="stars">★★★★☆ <span>7.5</span></div>
+                        <div class="price-row">
+                            <span class="price">$99.50</span>
+                            <span class="old-price">$128.00</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card" onclick="window.location='/products/5'">
+                    <div class="card-top">
+                        <img src="https://via.placeholder.com/200x160" alt="Product">
+                        <button class="wishlist">♡</button>
+                    </div>
+                    <div class="card-body">
+                        <p class="product-name">MacBook Pro 16" M1</p>
+                        <div class="stars">★★★★★ <span>9.0</span></div>
+                        <div class="price-row">
+                            <span class="price">$99.50</span>
+                            <span class="old-price">$128.00</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card" onclick="window.location='/products/6'">
+                    <div class="card-top">
+                        <img src="https://via.placeholder.com/200x160" alt="Product">
+                        <button class="wishlist">♡</button>
+                    </div>
+                    <div class="card-body">
+                        <p class="product-name">Apple Watch Series 7</p>
+                        <div class="stars">★★★★☆ <span>7.5</span></div>
+                        <div class="price-row">
+                            <span class="price">$99.50</span>
+                            <span class="old-price">$128.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PAGINATION -->
+            <div class="pagination">
+                <select><option>Show 10</option><option>Show 20</option></select>
+                <button class="page-btn">‹</button>
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <button class="page-btn">›</button>
+            </div>
+
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p>© 2026 Brand. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="/script.js"></script>
+</body>
+</html>
