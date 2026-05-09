@@ -3,17 +3,60 @@
 
 const express = require('express');
 const router =express.Router();
-const path =require('path'); //importing path module to work with file paths
-router.get('/',(req,res)=>{
-    res.sendFile(path.join(__dirname,'../views/index.html')); //send the index.html file when the root route is accessed
+const Product=require('/models/Product');//importing path module to work with file paths
+//Home page
+
+
+router.get('/',async (req,res)=>{
+   try{
+    //fetching 4 products
+    const featuredProducts=await Product.find().limit(4); //fetching 4 products from the database
+    res.render('index',{featuredProducts}); //rendering the index.ejs file and passing the featured products to it  
+    }catch(err){
+        console.error('Error fetching featured products:', err);
+        res.status(500).render('error');
+    }
 });
-router.get('/products',(req,res)=>{
-    res.sendFile(path.join(__dirname,'../views/products.html'));
+
+
+router.get('/products',async (req,res)=>{
+    try{
+        const searchQuery=req.query.search||'';
+        const categoryFilter= req.query.category||'';
+
+        let filter={};
+        if(searchQuery){
+            filter.name={$regex:searchQuery,$options:'i'}; //case-insensitive search for product name
+        }
+        if(categoryFilter){
+            filter.category=categoryFilter;
+        }
+        const products=await Product.find(filter);
+
+        const categories=await Product.distinct('category'); //fetching distinct categories from the database to populate the category filter dropdown
+        res.render('products',{products,searchQuery,categoryFilter,totalCount:products.length}); //rendering the products.ejs file and passing the products, search query, category filter and categories to it
+
+    }catch(err){
+        console.error('Error fetching products:', err);
+        res.status(500).render('error');
+    }
+   
 });//send the products.html file when the /products route is accessed
 
-router.get('/products/:id',(req,res)=>{
-    console.log('Product requested:',req.params.id); //log the product id to the console
-    res.sendFile(path.join(__dirname,'../views/product_details.html')); //send the product.html file when a specific product is requested
-});
+router.get('/products/:id',async (req,res)=>{
+    try{
+        const product=await Product.findbyId(req.params.id); //fetching the product details from the database using the product id
+        if (!product){
+            return  res.status(404).render('error'); //if product not found, render the error page
+
+        }
+        const relatedProducts=await Product.find({category:product.category,_id:{$ne:product._id}}).limit(4); //fetching related products from the database based on the category of the current product, excluding the current product itself
+        res.render('product_details',{product,relatedProducts});
+    }catch(err){
+        console.error('Error fetching product details:', err);
+        res.status(500).render('error');
+    }
+});//send the product_details.html file when the /products/:id route is accessed, :id is a placeholder for the product id
+
 
 module.exports=router; //export the router to be used in server.js like returning something from a module
