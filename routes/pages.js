@@ -3,7 +3,7 @@
 
 const express = require('express');
 const router =express.Router();
-const Product=require('/models/Product');//importing path module to work with file paths
+const Product=require('../models/Product');//importing path module to work with file paths
 //Home page
 
 
@@ -11,7 +11,7 @@ router.get('/',async (req,res)=>{
    try{
     //fetching 4 products
     const featuredProducts=await Product.find().limit(4); //fetching 4 products from the database
-    res.render('index',{featuredProducts}); //rendering the index.ejs file and passing the featured products to it  
+    res.render('index',{products: featuredProducts}); //rendering the index.ejs file and passing the featured products to it  
     }catch(err){
         console.error('Error fetching featured products:', err);
         res.status(500).render('error');

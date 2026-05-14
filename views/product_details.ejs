@@ -53,45 +53,51 @@
         </div>
 
         <!-- RIGHT: Info -->
+        <!-- Replace the detail-info section -->
         <div class="detail-info">
-            <p class="in-stock">✔ In stock</p>
-            <h1>Mens Long Sleeve T-shirt Cotton Base Layer Slim Muscle</h1>
+            <p class="in-stock"><% if(product.stock > 0) { %>✔ In stock (<%= product.stock %> units)<% } else { %>❌ Out of stock<% } %></p>
+            <h1><%= product.name %></h1>
 
             <div class="rating-row">
-                <span class="stars">★★★★★</span>
-                <span>9.3</span>
+                <span class="stars">
+                    <% for(let i = 1; i <= 5; i++) { %>
+                        <%= i <= Math.round(product.rating/2) ? '★' : '☆' %>
+                    <% } %>
+                </span>
+                <span><%= product.rating %></span>
                 <span class="sep">|</span>
-                <span>32 reviews</span>
+                <span><%= product.reviews %> reviews</span>
                 <span class="sep">|</span>
-                <span>154 sold</span>
+                <span><%= product.sold %> sold</span>
             </div>
 
             <!-- PRICING TIERS (as in Figma) -->
             <div class="price-tiers">
                 <div class="tier active-tier">
-                    <span class="tier-price">$98.00</span>
+                    <span class="tier-price">$<%= product.price.toFixed(2) %></span>
                     <span class="tier-qty">50-100 pcs</span>
                 </div>
                 <div class="tier">
-                    <span class="tier-price">$90.00</span>
+                    <span class="tier-price">$<%= (product.price * 0.91).toFixed(2) %></span>
                     <span class="tier-qty">100-700 pcs</span>
                 </div>
                 <div class="tier">
-                    <span class="tier-price">$78.00</span>
+                    <span class="tier-price">$<%= (product.price * 0.79).toFixed(2) %></span>
                     <span class="tier-qty">700+ pcs</span>
                 </div>
             </div>
-
+            
+            
             <!-- SPECS TABLE -->
             <table class="specs-table">
-                <tr><td>Price</td><td>Negotiable</td></tr>
-                <tr><td>Type</td><td>Classic shoes</td></tr>
-                <tr><td>Material</td><td>Plastic material</td></tr>
-                <tr><td>Design</td><td>Modern nice</td></tr>
-                <tr><td>Customization</td><td>Customized logo and design custom packages</td></tr>
-                <tr><td>Protection</td><td>Refund Policy</td></tr>
-                <tr><td>Warranty</td><td>2 years full warranty</td></tr>
+                <tr><td>Price</td><td>$<%= product.price.toFixed(2) %></td></tr>
+                <tr><td>Brand</td><td><%= product.brand %></td></tr>
+                <tr><td>Category</td><td><%= product.category %></td></tr>
+                <tr><td>Stock</td><td><%= product.stock %> units</td></tr>
+                <tr><td>Sold</td><td><%= product.sold %> units</td></tr>
+                <tr><td>Rating</td><td><%= product.rating %>/10</td></tr>
             </table>
+            
 
             <div class="detail-actions">
                 <button class="btn-primary">Send inquiry</button>
@@ -108,68 +114,36 @@
             <button class="tab" onclick="switchTab(this, 'shipping')">Shipping</button>
             <button class="tab" onclick="switchTab(this, 'seller')">About seller</button>
         </div>
-
+        <!-- Description tab content -->
         <div id="description" class="tab-content active">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <table class="specs-table" style="margin-top:1rem">
-                <tr><td>Model</td><td>#8786867</td></tr>
-                <tr><td>Style</td><td>Classic style</td></tr>
-                <tr><td>Certificate</td><td>ISO-898212</td></tr>
-                <tr><td>Size</td><td>34mm x 450mm x 19mm</td></tr>
-                <tr><td>Memory</td><td>36GB RAM</td></tr>
-            </table>
-            <ul class="feature-list">
-                <li>✔ Some great feature name here</li>
-                <li>✔ Lorem ipsum dolor sit amet consectetur</li>
-                <li>✔ Duis aute irure dolor in reprehenderit</li>
-                <li>✔ Some great feature name here</li>
-            </ul>
+            <p><%= product.description %></p>
         </div>
-
-        <div id="reviews" class="tab-content">
-            <p>Customer reviews will appear here.</p>
-        </div>
-        <div id="shipping" class="tab-content">
-            <p>Shipping information will appear here.</p>
-        </div>
-        <div id="seller" class="tab-content">
-            <p>Seller information will appear here.</p>
-        </div>
-    </div>
+        
+        
 
     <!-- RELATED PRODUCTS -->
     <section class="related-section">
         <h3>Related products</h3>
         <div class="product-grid">
-            <div class="product-card">
-                <div class="card-top"><img src="https://via.placeholder.com/160x130" alt=""></div>
+            <% relatedProducts.forEach(p => { %>
+            <div class="product-card" onclick="window.location='/products/<%= p._id %>'">
+                <div class="card-top">
+                    <img src="<%= p.image %>" alt="<%= p.name %>">
+                </div>
                 <div class="card-body">
-                    <p class="product-name">Xiaomi Redmi 8 Original</p>
-                    <div class="price-row"><span class="price">$32.00</span><span class="old-price">$40.00</span></div>
+                    <p class="product-name"><%= p.name %></p>
+                    <div class="price-row">
+                        <span class="price">$<%= p.price.toFixed(2) %></span>
+                        <span class="old-price">$<%= p.originalPrice.toFixed(2) %></span>
+                    </div>
                 </div>
             </div>
-            <div class="product-card">
-                <div class="card-top"><img src="https://via.placeholder.com/160x130" alt=""></div>
-                <div class="card-body">
-                    <p class="product-name">Xiaomi Redmi 8 Original</p>
-                    <div class="price-row"><span class="price">$32.00</span><span class="old-price">$40.00</span></div>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="card-top"><img src="https://via.placeholder.com/160x130" alt=""></div>
-                <div class="card-body">
-                    <p class="product-name">Xiaomi Redmi 8 Original</p>
-                    <div class="price-row"><span class="price">$32.00</span><span class="old-price">$40.00</span></div>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="card-top"><img src="https://via.placeholder.com/160x130" alt=""></div>
-                <div class="card-body">
-                    <p class="product-name">Xiaomi Redmi 8 Original</p>
-                    <div class="price-row"><span class="price">$32.00</span><span class="old-price">$40.00</span></div>
-                </div>
-            </div>
+            <% }) %>
         </div>
+        
+        
+        
+         
     </section>
 
     <footer class="footer">

@@ -106,7 +106,9 @@
         <main class="products-main">
 
             <div class="products-header">
-                <p>12,911 items in <strong>Mobile accessory</strong></p>
+                <p><%= totalCount %> items found
+                   <% if (searchQuery) { %> for "<strong><%= searchQuery %></strong>"<% } %>
+                </p>
                 <div class="products-controls">
                     <label><input type="checkbox"> Verified only</label>
                     <select>
@@ -128,93 +130,39 @@
             </div>
 
             <!-- PRODUCT GRID -->
-            <div class="product-grid">
-                <div class="product-card" onclick="window.location='/products/1'">
-                    <div class="card-top">
-                        <img src="https://via.placeholder.com/200x160" alt="Product">
-                        <button class="wishlist">♡</button>
-                    </div>
-                    <div class="card-body">
-                        <p class="product-name">GoPro HERO5 4K Action Camera - Black</p>
-                        <div class="stars">★★★★☆ <span>7.5</span></div>
-                        <div class="price-row">
-                            <span class="price">$99.50</span>
-                            <span class="old-price">$128.00</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-card" onclick="window.location='/products/2'">
-                    <div class="card-top">
-                        <img src="https://via.placeholder.com/200x160" alt="Product">
-                        <button class="wishlist">♡</button>
-                    </div>
-                    <div class="card-body">
-                        <p class="product-name">Apple iPhone 12 Pro Max</p>
-                        <div class="stars">★★★★★ <span>9.3</span></div>
-                        <div class="price-row">
-                            <span class="price">$99.50</span>
-                            <span class="old-price">$128.00</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-card" onclick="window.location='/products/3'">
-                    <div class="card-top">
-                        <img src="https://via.placeholder.com/200x160" alt="Product">
-                        <button class="wishlist">♡</button>
-                    </div>
-                    <div class="card-body">
-                        <p class="product-name">Canon EOS DSLR Camera Black</p>
-                        <div class="stars">★★★★☆ <span>7.5</span></div>
-                        <div class="price-row">
-                            <span class="price">$99.50</span>
-                            <span class="old-price">$128.00</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-card" onclick="window.location='/products/4'">
-                    <div class="card-top">
-                        <img src="https://via.placeholder.com/200x160" alt="Product">
-                        <button class="wishlist">♡</button>
-                    </div>
-                    <div class="card-body">
-                        <p class="product-name">Samsung Galaxy S21 Ultra</p>
-                        <div class="stars">★★★★☆ <span>7.5</span></div>
-                        <div class="price-row">
-                            <span class="price">$99.50</span>
-                            <span class="old-price">$128.00</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-card" onclick="window.location='/products/5'">
-                    <div class="card-top">
-                        <img src="https://via.placeholder.com/200x160" alt="Product">
-                        <button class="wishlist">♡</button>
-                    </div>
-                    <div class="card-body">
-                        <p class="product-name">MacBook Pro 16" M1</p>
-                        <div class="stars">★★★★★ <span>9.0</span></div>
-                        <div class="price-row">
-                            <span class="price">$99.50</span>
-                            <span class="old-price">$128.00</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-card" onclick="window.location='/products/6'">
-                    <div class="card-top">
-                        <img src="https://via.placeholder.com/200x160" alt="Product">
-                        <button class="wishlist">♡</button>
-                    </div>
-                    <div class="card-body">
-                        <p class="product-name">Apple Watch Series 7</p>
-                        <div class="stars">★★★★☆ <span>7.5</span></div>
-                        <div class="price-row">
-                            <span class="price">$99.50</span>
-                            <span class="old-price">$128.00</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          
 
+            <!-- Replace the hardcoded product grid -->
+            <div class="product-grid">
+                <% if (products.length === 0) { %>
+                    <div style="grid-column: 1/-1; text-align:center; padding: 3rem; color: #888;">
+                        <p>No products found. Try a different search.</p>
+                    </div>
+                <% } else { %>
+                    <% products.forEach(product => { %>
+                    <div class="product-card" onclick="window.location='/products/<%= product._id %>'">
+                        <div class="card-top">
+                            <img src="<%= product.image %>" alt="<%= product.name %>">
+                            <button class="wishlist">♡</button>
+                        </div>
+                        <div class="card-body">
+                            <p class="product-name"><%= product.name %></p>
+                            <p class="category"><%= product.category %></p>
+                            <div class="stars">
+                                <% for(let i = 1; i <= 5; i++) { %>
+                                    <%= i <= Math.round(product.rating/2) ? '★' : '☆' %>
+                                <% } %>
+                                <span><%= product.rating %></span>
+                            </div>
+                            <div class="price-row">
+                                <span class="price">$<%= product.price.toFixed(2) %></span>
+                                <span class="old-price">$<%= product.originalPrice.toFixed(2) %></span>
+                            </div>
+                        </div>
+                    </div>
+                    <% }) %>
+                <% } %>
+            </div>
             <!-- PAGINATION -->
             <div class="pagination">
                 <select><option>Show 10</option><option>Show 20</option></select>
