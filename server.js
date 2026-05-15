@@ -11,7 +11,7 @@ app.use(express.urlencoded({extended:true})); //to parse form data
 app.use(cookieParser()); //enabling reading cookies
 
 //connect to mongodb
-mongoose.connect('mongodb://localhost:27017/ecommerce')
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/ecommerce')
     .then(() =>console.log('Connected to MongoDB'))
     .catch(err => console.error('Could not connect to MongoDB', err));
 // const express=require('express'); //importing same as "from fastapi import FASTAPI"
