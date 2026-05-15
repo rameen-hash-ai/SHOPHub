@@ -1,20 +1,31 @@
 //import xpress and create a router
 //router is like a mini-app that handles a group of routes
-
+const jwt=require('jsonwebtoken');
+const SECRET='shophub_secret_key_2026';
 const express = require('express');
 const router =express.Router();
 const Product=require('../models/Product');//importing path module to work with file paths
 //Home page
+
+function getUser(req) {
+    try{
+        return jwt.verify(req.cookies.token,SECRET);
+    } catch{
+        return null;
+    }
+}
+
+
 
 
 router.get('/',async (req,res)=>{
    try{
     //fetching 4 products
     const featuredProducts=await Product.find().limit(4); //fetching 4 products from the database
-    res.render('index',{products: featuredProducts}); //rendering the index.ejs file and passing the featured products to it  
+    res.render('index',{products: featuredProducts,user:getUser(req)}); //rendering the index.ejs file and passing the featured products to it  
     }catch(err){
-        console.error('Error fetching featured products:', err);
-        res.status(500).render('error');
+        console.error(err);
+        res.status(500).send('error');
     }
 });
 
@@ -23,6 +34,11 @@ router.get('/products',async (req,res)=>{
     try{
         const searchQuery=req.query.search||'';
         const categoryFilter= req.query.category||'';
+        const page=parseInt(req.query.page)||1;
+        const limit=6;//products per page
+        const skip=(page-1)*limit;
+
+
 
         let filter={};
         if(searchQuery){
@@ -31,30 +47,42 @@ router.get('/products',async (req,res)=>{
         if(categoryFilter){
             filter.category=categoryFilter;
         }
-        const products=await Product.find(filter);
+        const totalCount=await Product.countDocuments(filter);
+        const totalPages=Math.ceil(totalCount/limit);
+        const products=await Product.find(filter).skip(skip).limit(limit);
 
-        const categories=await Product.distinct('category'); //fetching distinct categories from the database to populate the category filter dropdown
-        res.render('products',{products,searchQuery,categoryFilter,totalCount:products.length}); //rendering the products.ejs file and passing the products, search query, category filter and categories to it
+        const categories=await Product.distinct('category'); 
+
+        res.render('products',{
+            products,
+            searchQuery,
+            categoryFilter,
+            totalCount,
+            currentPage:page,
+            totalPages,user:getUser(req)
+        });
+
+        
 
     }catch(err){
-        console.error('Error fetching products:', err);
-        res.status(500).render('error');
+        console.error(err);
+        res.status(500).send('error');
     }
    
 });//send the products.html file when the /products route is accessed
 
 router.get('/products/:id',async (req,res)=>{
     try{
-        const product=await Product.findbyId(req.params.id); //fetching the product details from the database using the product id
+        const product=await Product.findById(req.params.id); //fetching the product details from the database using the product id
         if (!product){
             return  res.status(404).render('error'); //if product not found, render the error page
 
         }
         const relatedProducts=await Product.find({category:product.category,_id:{$ne:product._id}}).limit(4); //fetching related products from the database based on the category of the current product, excluding the current product itself
-        res.render('product_details',{product,relatedProducts});
+        res.render('product_details',{product,relatedProducts,user:getUser(req)});
     }catch(err){
-        console.error('Error fetching product details:', err);
-        res.status(500).render('error');
+        console.error(err);
+        res.status(500).send(' Server error');
     }
 });//send the product_details.html file when the /products/:id route is accessed, :id is a placeholder for the product id
 

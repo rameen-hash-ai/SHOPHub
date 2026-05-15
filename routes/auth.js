@@ -66,7 +66,7 @@ router.post('/login',async(req,res)=>{
         res.redirect('/');
     }catch (err){
         console.error(err);
-        res.render('login'.{error:'Something went wrong'})
+        res.render('login',{error:'Something went wrong'})
     }
 });
 

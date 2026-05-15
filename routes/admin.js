@@ -9,7 +9,7 @@ router.get('/add-product',authMiddleware,(req,res)=>{
     res.render("add_product",{error:null,success:null});
 });
 
-route.post('/add-product',authMiddleware,async(req,res)=>{
+router.post('/add-product',authMiddleware,async(req,res)=>{
     try{
         const {name,price,originalPrice,category,brand,stock,description,image}=req.body;
 

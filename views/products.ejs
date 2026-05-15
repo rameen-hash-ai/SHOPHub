@@ -28,8 +28,15 @@
                 <button class="btn-search" onclick="handleSearch()">Search</button>
             </div>
             <div class="nav-icons">
-                <a href="#">👤<span>Profile</span></a>
-                <a href="#">🛒<span>My cart</span></a>
+                <div class="nav-icons">
+                    <% if (user) { %>
+                        <a href="/add-product">➕<span>Add</span></a>
+                        <a href="/logout">🚪<span>Logout</span></a>
+                    <% } else { %>
+                        <a href="/login">👤<span>Login</span></a>
+                    <% } %>
+                    <a href="#">🛒<span>My cart</span></a>
+                </div>
             </div>
         </div>
         <div class="secondary-nav">
@@ -165,12 +172,21 @@
             </div>
             <!-- PAGINATION -->
             <div class="pagination">
-                <select><option>Show 10</option><option>Show 20</option></select>
-                <button class="page-btn">‹</button>
-                <button class="page-btn active">1</button>
-                <button class="page-btn">2</button>
-                <button class="page-btn">3</button>
-                <button class="page-btn">›</button>
+                <% if (currentPage > 1) { %>
+                    <a href="/products?page=<%= currentPage-1 %>&search=<%= searchQuery %>" class="page-btn">‹</a>
+                <% } %>
+
+                <% for(let i = 1; i <= totalPages; i++) { %>
+                    <a href="/products?page=<%= i %>&search=<%= searchQuery %>"
+                        class="page-btn <%= i === currentPage ? 'active' : '' %>">
+                        <%= i %>
+                    </a>
+                <% } %>
+
+                <% if (currentPage < totalPages) { %>
+                    <a href="/products?page=<%= currentPage+1 %>&search=<%= searchQuery %>" class="page-btn">›</a>
+                <% } %>
+                
             </div>
 
         </main>

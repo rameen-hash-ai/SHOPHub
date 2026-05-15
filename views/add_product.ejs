@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brand | Add Product</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">🅱 Brand</a>
+            <div class="nav-icons">
+                 <% if (user) { %>
+                    <a href="/add-product">➕<span>Add</span></a>
+                    <a href="/logout">🚪<span>Logout</span></a>
+                <% } else { %>
+                    <a href="/login">👤<span>Login</span></a>
+                <% } %>
+                <a href="#">🛒<span>My cart</span></a>
+            </div>
+        </div>c
+    </nav>
+
+    <div class="auth-container">
+        <div class="auth-card" style="max-width:600px">
+            <h2>Add New Product</h2>
+
+            <% if (error) { %>
+                <div class="alert-error"><%= error %></div>
+            <% } %>
+            <% if (success) { %>
+                <div class="alert-success"><%= success %></div>
+            <% } %>
+
+            <form action="/add-product" method="POST">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Product Name</label>
+                        <input type="text" name="name" placeholder="e.g. iPhone 13 Pro" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Brand</label>
+                        <input type="text" name="brand" placeholder="e.g. Apple">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Price ($)</label>
+                        <input type="number" name="price" step="0.01" placeholder="99.99" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Original Price ($)</label>
+                        <input type="number" name="originalPrice" step="0.01" placeholder="129.99">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select name="category" required>
+                            <option value="">Select category</option>
+                            <option>Smartphones</option>
+                            <option>Electronics</option>
+                            <option>Accessories</option>
+                            <option>Clothing</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Stock</label>
+                        <input type="number" name="stock" placeholder="50" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Image URL</label>
+                    <input type="text" name="image" placeholder="https://...">
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea name="description" rows="4" placeholder="Product description..."></textarea>
+                </div>
+                <button type="submit" class="btn-primary" style="width:100%">Add Product</button>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-bottom"><p>© 2026 Brand.</p></div>
+    </footer>
+</body>
+</html>

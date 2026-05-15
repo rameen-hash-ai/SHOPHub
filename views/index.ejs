@@ -33,9 +33,12 @@
             </div>
 
             <div class="nav-icons">
-                <a href="#">👤<span>Profile</span></a>
-                <a href="#">💬<span>Message</span></a>
-                <a href="#">📦<span>Orders</span></a>
+                 <% if (user) { %>
+                    <a href="/add-product">➕<span>Add</span></a>
+                    <a href="/logout">🚪<span>Logout</span></a>
+                <% } else { %>
+                    <a href="/login">👤<span>Login</span></a>
+                <% } %>
                 <a href="#">🛒<span>My cart</span></a>
             </div>
         </div>
